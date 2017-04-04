@@ -40,7 +40,7 @@ router.post('/login', function (req, res, next) {
       next(err)
     } else {
       req.session.userId = user.id
-      res.sendStatus(204)
+      res.status(204).send(user);
     }
   })
   .catch(next);
