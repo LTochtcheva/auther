@@ -25,6 +25,27 @@ router.get('/', function (req, res, next) {
   .catch(next);
 });
 
+router.post('/login', function (req, res, next) {
+  User.findOne({
+      // where: req.body
+    where: {
+    email: req.body.email,
+    password: req.body.password
+  }})
+  .then(function(user){
+    if (!user){
+      console.log('FOUND THE ROUTE')
+      var err = new Error('Invalid E-mail or password.')
+      err.status = 401
+      next(err)
+    } else {
+      req.session.userId = user.id
+      res.sendStatus(204)
+    }
+  })
+  .catch(next);
+});
+
 router.post('/', function (req, res, next) {
   User.create(req.body)
   .then(function (user) {

@@ -9,6 +9,7 @@ app.use(require('./logging.middleware'));
 
 app.use(require('./body-parsing.middleware'));
 
+app.use(require('./session.middleware'))
 
 // "Responding" middleware (may send a response back to client)
 
