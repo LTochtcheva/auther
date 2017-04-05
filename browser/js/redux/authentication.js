@@ -1,6 +1,7 @@
 import axios from 'axios';
 //actions
 const  SET_CURRENT_USER = 'SET_CURRENT_USER';
+
 //action creators
 const setCurrentUser  = user => ({ type: SET_CURRENT_USER, user});
 //reducer
@@ -15,8 +16,8 @@ export default function reducer (currentUser = {}, action) {
   }
 }
 //dispatch
-export const loginUser = (email, password) => dispatch => {
-  axios.post('/api/users/login', {email, password})
+export const loginUser = (user) => dispatch => {
+  axios.post('/api/users/login', user)
   .then(res => dispatch(setCurrentUser(res.data)))
   .catch(err => console.error(`Logging in unsuccesful`, err));
 }

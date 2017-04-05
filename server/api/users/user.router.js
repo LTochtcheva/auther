@@ -26,8 +26,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/login', function (req, res, next) {
+  console.log(req.body.email , req.body.password)
   User.findOne({
-      // where: req.body
+    // where: req.body
     where: {
     email: req.body.email,
     password: req.body.password
