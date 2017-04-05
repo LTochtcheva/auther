@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import {addUser} from '../redux/users'
+import {loginUser} from '../redux/authentication'
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -62,11 +63,13 @@ class Signup extends React.Component {
   onSignupSubmit(event) {
     const { message } = this.props;
     event.preventDefault();
-    console.log(`${message} isn't implemented properly yet`);
-    this.props.addUser({
+    const user = {
       email: event.target.email.value,
       password: event.target.password.value
-    })
+    }
+    console.log('signup props',this.props)
+    this.props.addUser(user)
+    this.props.loginUser(user)
   }
 }
 
@@ -77,6 +80,9 @@ const mapDispatch = (dispatch) =>{
   return {
     addUser: (user) =>{
       dispatch(addUser(user))
+    },
+    loginUser: (user) => {
+      dispatch(loginUser(user))
     }
   }
 };

@@ -78,7 +78,7 @@ const mapProps = null;
 
 const mapDispatch = dispatch => ({
   logout: () => {
-    console.log('You signed out. Sorta.');
+    alert('You signed out. Sorta.');
     browserHistory.push('/');
   }
 });

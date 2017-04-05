@@ -55,7 +55,10 @@ export const removeUser = id => dispatch => {
 
 export const addUser = user => dispatch => {
   axios.post('/api/users', user)
-       .then(res => dispatch(create(res.data)))
+       .then(res => {
+        dispatch(create(res.data))
+        dispatch(setCurrentUser(res.data)) // do the import
+       })
        .catch(err => console.error(`Creating user: ${user} unsuccesful`, err));
 };
 

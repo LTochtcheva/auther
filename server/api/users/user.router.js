@@ -25,8 +25,11 @@ router.get('/', function (req, res, next) {
   .catch(next);
 });
 
+// router.put('/logout', function(req,res,next){
+
+// })
+
 router.post('/login', function (req, res, next) {
-  console.log(req.body.email , req.body.password)
   User.findOne({
     // where: req.body
     where: {
@@ -41,7 +44,7 @@ router.post('/login', function (req, res, next) {
       next(err)
     } else {
       req.session.userId = user.id
-      res.status(204).send(user);
+      res.send(user);
     }
   })
   .catch(next);
@@ -50,6 +53,7 @@ router.post('/login', function (req, res, next) {
 router.post('/', function (req, res, next) {
   User.create(req.body)
   .then(function (user) {
+    req.session.userId = user.id
     res.status(201).json(user);
   })
   .catch(next);

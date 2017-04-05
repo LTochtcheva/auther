@@ -9,6 +9,7 @@ export default function reducer (currentUser = {}, action) {
   switch (action.type) {
 
     case SET_CURRENT_USER:
+    console.log('user', action.user)
       return action.user;
 
     default:
@@ -18,6 +19,6 @@ export default function reducer (currentUser = {}, action) {
 //dispatch
 export const loginUser = (user) => dispatch => {
   axios.post('/api/users/login', user)
-  .then(res => dispatch(setCurrentUser(res.data)))
+  .then(foundUser => dispatch(setCurrentUser(foundUser.data)))
   .catch(err => console.error(`Logging in unsuccesful`, err));
 }
